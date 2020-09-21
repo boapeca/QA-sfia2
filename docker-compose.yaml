@@ -3,24 +3,26 @@ services:
   frontend:
     image: frontend
     build: ./frontend
-    ports:
-    - target: 5000
-      published: 5000
+    #ports:
+            # - target: 5000
+      #  published: 5000
     depends_on:
       - backend
   backend:
     image: backend
     build: ./backend
+    environment:
+      - MYSQL_DATABASE=db
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - DATABASE_URI=${DATABASE_URI}
+      - SECRET_KEY=${SECRET_KEY}
     depends_on:
       - mysql
   mysql:
     image: db
     build: ./database
     environment:
-      - MYSQL_DATABASE=db
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
-      - DATABASE_URI=${DATABASE_URI}
-      - SECRET_KEY=${SECRET_KEY}
   nginx:
     image: nginx:latest
     ports:
@@ -32,4 +34,4 @@ services:
       source: ./nginx/nginx.conf
       target: /etc/nginx/nginx.conf
     depends_on:
-      - frontend  
+     - frontend  
