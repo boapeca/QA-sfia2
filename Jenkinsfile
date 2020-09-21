@@ -5,7 +5,7 @@ pipeline{
             rollback = 'false'
         }
         stages{
-            stage('test'){
+            /*stage('test'){
                 steps{
                     sh '''
                     #!/bin/bash
@@ -14,6 +14,7 @@ pipeline{
                     '''
                 }          
             }
+            */
             stage('Deploy App'){
                 steps{
                     sh "docker-compose up -d --build"
