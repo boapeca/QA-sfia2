@@ -6,3 +6,30 @@ services:
     ports:
     - target: 5000
       published: 5000
+    depends_on:
+      - backend
+  backend:
+    image: backend
+    build: ./backend
+    depends_on:
+      - mysql
+  mysql:
+    image: db
+    build: ./database
+    environment:
+      - MYSQL_DATABASE=db
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+      - DATABASE_URI=${DATABASE_URI}
+      - SECRET_KEY=${SECRET_KEY}
+  nginx:
+    image: nginx:latest
+    ports:
+    - target: 80
+      published: 80
+      protocol: tcp
+    volumes:
+    - type: bind
+      source: ./nginx/nginx.conf
+      target: /etc/nginx/nginx.conf
+    depends_on:
+      - frontend  

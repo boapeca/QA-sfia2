@@ -9,6 +9,6 @@ COPY . .
 #RUN pip install PyMySQL[rsa]
 RUN pip install -r requirements.txt
 # RUN pip install cryptography
-EXPOSE 5000
+EXPOSE 5001
 # Run 'python app.py' on container start-up. This is the main process.
-ENTRYPOINT ["/usr/local/bin/python3", "app.py"]
+ENTRYPOINT ["/usr/local/bin/python", "app.py"]
