@@ -39,8 +39,8 @@ pipeline{
                     sh "sudo docker-compose up -d --build"
                     sh "sudo docker-compose logs"  
                     */
-                    withCredentials([string(credentialID: 'DB_PASSWORD', variable: 'PW']){
-                        withCredentials([string(credentialID: 'DATABASE_URI', variable: 'URI']){
+                    withCredentials([string(credentialID: 'DB_PASSWORD', variable: 'PW')]){
+                        withCredentials([string(credentialID: 'DATABASE_URI', variable: 'URI')]){
                                 sh "export MYSQL_ROOT_PASSWORD=${PW}"
                             sh "export DATABASE_URI=${URI}"
                             sh "sudo docker-compose up -d --build"
