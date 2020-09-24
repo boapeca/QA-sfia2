@@ -18,8 +18,8 @@ pipeline{
             stage('Deploy App'){
                 steps{
                     withCredentials([string(credentialsID: 'db_password', variable: 'dbpw')])
-                    sh "export DB_PASSWORD='$dbpw'"
-                    sh "export DATABASE_URI=${env.DATABASE_URI}"
+                    sh "export DB_PASSWORD=${DB_PASSWORD}"
+                    sh "export DATABASE_URI=${DATABASE_URI}"
                     sh "docker-compose up -d --build"
                 }
             }
