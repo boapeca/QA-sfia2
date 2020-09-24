@@ -35,7 +35,7 @@ pipeline{
                     sh "export DATABASE_URI"
                     sh "export SECRET_KEY"
                     sh "sudo docker-compose up -d --build"
-                    sh "docker-compose logs"    
+                    sh "sudo docker-compose logs"    
                 }
             }
         }    
