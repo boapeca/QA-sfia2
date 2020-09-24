@@ -5,16 +5,14 @@ pipeline{
             rollback = 'false'
         }
         stages{
-            /*stage('test'){
+            stage('make directory'){
                 steps{
                     sh '''
-                    #!/bin/bash
-                    cd frontend/
-                    pip install -r requirements.txt
+                    mkdir sfiaTest && cd $_
                     '''
                 }          
             }
-            */
+            
             stage('Install Docker & Docker-compose'){
                 steps{
                     sh '''
