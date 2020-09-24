@@ -30,8 +30,8 @@ pipeline{
                 steps{
                     sh "export MYSQL_DATABASE=db"
                     
-                    sh "export MYSQL_ROOT_PASSWORD=${env.DB_PASSWORD}"
-                    sh "export DATABASE_URI=${env.DATABASE_URI}"
+                    sh "export MYSQL_ROOT_PASSWORD=${DB_PASSWORD}"
+                    sh "export DATABASE_URI=${DATABASE_URI}"
                     
                     // sh "source ./load_env.sh"
                     sh "export SECRET_KEY"
