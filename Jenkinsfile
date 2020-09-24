@@ -32,7 +32,7 @@ pipeline{
                     sh "export DATABASE_URI"
                     sh "export SECRET_KEY"
                    
-                    sh "sudo -E MYSQL_DATABASE=db MYSQL_ROOT_PASSWORD=${DB_PASSWORD} DATABASE_URI=${DATABASE_URI} SECRET_KEY=${SECRET_KEY} docker-compose up -d --build"
+                    sh "sudo -E MYSQL_ROOT_PASSWORD=${DB_PASSWORD} DATABASE_URI=${DATABASE_URI} SECRET_KEY=${SECRET_KEY} docker-compose up -d --build"
                     sh "sudo docker-compose logs"    
                 }
             }
