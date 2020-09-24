@@ -8,6 +8,7 @@ pipeline{
             stage('make directory'){
                 steps{
                     sh '''
+                    rm -rf sfiaTest
                     mkdir sfiaTest && cd $_
                     '''
                 }          
