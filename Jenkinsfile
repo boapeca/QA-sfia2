@@ -29,7 +29,7 @@ pipeline{
             stage('Deploy App'){
                 steps{
                     sh "export MYSQL_DATABASE=db"
-                    
+                    /*
                     sh "export MYSQL_ROOT_PASSWORD=${env.DB_PASSWORD}"
                     sh "export DATABASE_URI=${env.DATABASE_URI}"
                     
@@ -37,7 +37,16 @@ pipeline{
                     sh "export SECRET_KEY"
                    
                     sh "sudo docker-compose up -d --build"
-                    sh "sudo docker-compose logs"    
+                    sh "sudo docker-compose logs"  
+                    */
+                    withCredentials([string(credentialID: 'DB_PASSWORD', variable: '${DB_PASSWORD}]){
+                        withCredentials([string(credentialID: 'DATABASE_URI', variable: '${DATABASE_URI}]){
+                            sh "export MYSQL_ROOT_PASSWORD=${env.DB_PASSWORD}"
+                            sh "export DATABASE_URI=${env.DATABASE_URI}"
+                            sh "sudo docker-compose up -d --build"
+                            sh "sudo docker-compose logs" 
+                        }
+                    }
                 }
             }
         }    
