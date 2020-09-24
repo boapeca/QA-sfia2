@@ -31,7 +31,7 @@ pipeline{
                     sh "export MYSQL_ROOT_PASSWORD=${env.DB_PASSWORD}"
                     sh "export DATABASE_URI=${env.DATABASE_URI}"
                     */
-                    sh "source ~/load_env.sh"
+                    sh "source ./load_env.sh"
                     sh "export SECRET_KEY"
                    
                     sh "sudo docker-compose up -d --build"
