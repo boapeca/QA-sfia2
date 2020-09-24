@@ -18,9 +18,9 @@ pipeline{
             stage('Deploy App'){
                 steps{
 
-                    sh "export DB_PASSWORD=credentials('DB_PASSWORD')
-                    sh "export DATABASE_URI=credentials('DATABASE_URI')
-                    sh "export SECRET_KEY=credentials('SECRET_KEY')
+                    sh "export DB_PASSWORD = credentials('DB_PASSWORD')
+                    sh "export DATABASE_URI = credentials('DATABASE_URI')
+                    sh "export SECRET_KEY = credentials('SECRET_KEY')
                     sh "docker-compose up -d --build"
                 }
             }
