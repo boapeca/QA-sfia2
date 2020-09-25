@@ -1,5 +1,7 @@
 FROM python:3.7
-
+ARG DB_PASSWORD
+ARG DATABASE_URI
+ARG SECRET_KEY
 WORKDIR ./app
 # RUN apt-get update && apt-get install -y python3-pip && apt-get install python3-pymysql
 
