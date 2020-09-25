@@ -39,13 +39,13 @@ pipeline{
                     // sh "source ./load_env.sh"
                     sh "export SECRET_KEY=${env.SECRET_KEY}"
                    
-                    sh "sudo docker-compose up -d --build" <<EOF
+                    
                     sh "export MYSQL_ROOT_PASSWORD=${env.DB_PASSWORD}"
                     sh "export DATABASE_URI=${env.DATABASE_URI}"
                     
                     // sh "source ./load_env.sh"
                     sh "export SECRET_KEY=${env.SECRET_KEY}"
-                        EOF
+                    sh "sudo docker-compose up -d --build --build-arg MYSQL_ROOT_PASSWORD=${DB_PASSWORD} DATABASE_URI=${DATABASE_URI} SECRET_KEY=${SECRET_KEY}"
                     //sudo -E MYSQL_ROOT_PASSWORD=${DB_PASSWORD} DB_PASSWORD=${DB_PASSWORD} DATABASE_URI=${DATABASE_URI} SECRET_KEY=${SECRET_KEY} docker-compose pull && sudo -E MYSQL_ROOT_PASSWORD=${DB_PASSWORD} DB_PASSWORD=${DB_PASSWORD} DATABASE_URI=${DATABASE_URI} SECRET_KEY=${SECRET_KEY} docker-compose up -d --build
                     sh "sudo docker-compose logs"
                 }
