@@ -35,6 +35,7 @@ pipeline{
             }
             stage('Deploy App'){
                 steps{
+                    sh "sudo docker-compose down --rmi all"
                     sh "export MYSQL_DATABASE=db"
                     
                     sh "export MYSQL_ROOT_PASSWORD=${env.DB_PASSWORD}"
