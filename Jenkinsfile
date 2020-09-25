@@ -40,10 +40,7 @@ pipeline{
                     sh "export SECRET_KEY=${env.SECRET_KEY}"
                    
                     sh "sudo docker-compose up -d --build"
-                    sh "sudo docker-compose logs"  
-                 
-                        }
-                    }
+                    sh "sudo docker-compose logs"
                 }
             }
         }    
