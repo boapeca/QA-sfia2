@@ -3,6 +3,9 @@ pipeline{
         environment {
             app_version = 'v1'
             rollback = 'false'
+            SECRET_KEY = credentials("SECRET_KEY")
+            DB_PASSWORD = credentials("DB_PASSWORD")
+            DATABASE_URI = credentials("DATABASE_URI")
         }
         stages{
             stage('make directory'){
@@ -29,22 +32,16 @@ pipeline{
             stage('Deploy App'){
                 steps{
                     sh "export MYSQL_DATABASE=db"
-                    /*
+                    
                     sh "export MYSQL_ROOT_PASSWORD=${env.DB_PASSWORD}"
                     sh "export DATABASE_URI=${env.DATABASE_URI}"
                     
                     // sh "source ./load_env.sh"
-                    sh "export SECRET_KEY"
+                    sh "export SECRET_KEY=${env.SECRET_KEY}"
                    
                     sh "sudo docker-compose up -d --build"
                     sh "sudo docker-compose logs"  
-                    */
-                    withCredentials([string(credentialID: 'DB_PASSWORD', variable: 'PW')]){
-                        withCredentials([string(credentialID: 'DATABASE_URI', variable: 'URI')]){
-                                sh "export MYSQL_ROOT_PASSWORD=${PW}"
-                            sh "export DATABASE_URI=${URI}"
-                            sh "sudo docker-compose up -d --build"
-                            sh "sudo docker-compose logs" 
+                 
                         }
                     }
                 }
