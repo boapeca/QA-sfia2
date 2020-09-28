@@ -29,7 +29,7 @@ pipeline{
                     //sudo -E MYSQL_ROOT_PASSWORD=${DB_PASSWORD} DB_PASSWORD=${DB_PASSWORD} DATABASE_URI=${DATABASE_URI} SECRET_KEY=${SECRET_KEY} docker-compose pull && sudo -E MYSQL_ROOT_PASSWORD=${DB_PASSWORD} DB_PASSWORD=${DB_PASSWORD} DATABASE_URI=${DATABASE_URI} SECRET_KEY=${SECRET_KEY} docker-compose up -d --build
                     // sh "mysql_upgrade --protocol=tcp -P 3306"
                     sh "sudo docker-compose logs"
-                    EOF       
+                    EOF'''       
                     }    
                     
                 }
