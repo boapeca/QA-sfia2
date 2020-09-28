@@ -19,6 +19,7 @@ pipeline{
                     
                 }
             }
+                /*
             stage('make directory'){
                 steps{
                     sh '''
@@ -33,7 +34,7 @@ pipeline{
                         /*
                         curl https://get.docker.com | sudo bash
                     sudo usermod -aG docker $(whoami)
-                        */
+                        
                     sh '''
                     curl https://get.docker.com | sudo bash
                     sudo usermod -aG docker $(whoami)
@@ -59,5 +60,6 @@ pipeline{
                     sh "sudo docker-compose logs"
                 }
             }
+*/
         }    
 }
