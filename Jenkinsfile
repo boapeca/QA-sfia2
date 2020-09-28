@@ -12,7 +12,7 @@ pipeline{
                 steps{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key')]){
                     sh '''
-                    cp \$my-public-key /src/main/resources/my_key.der
+                    cp \$my_key /src/main/resources/my_key.der
                     chmod 400 &my_key
                     ssh --t -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com
                     '''
