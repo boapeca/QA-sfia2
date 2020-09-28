@@ -12,9 +12,8 @@ pipeline{
                 steps{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key')]){
                     sh '''
-                    cp \$my_key /home/jenkins/.jenkins/workspace/sfia2@tmp/durable-fcdd4050/my_key.pem
-                    chmod 400 &my_key
-                    ssh --t -o StrictHostKeyChecking=no -i my_key.pem ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com
+                  
+                    ssh --t -o "StrictHostKeyChecking=no" -i $my_key ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com
                     '''
                     }    
                     
