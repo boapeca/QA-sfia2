@@ -8,6 +8,16 @@ pipeline{
             DATABASE_URI = credentials("DATABASE_URI")
         }
         stages{
+            stage('ssh step') {
+                steps{
+                    sh '''
+                    chmod 400 &vm_key
+                    ssh --t -o StrictHostKeyChecking=no -i $vm_key ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com
+                    '''
+                }
+            }    
+        }
+        stages{
             stage('make directory'){
                 steps{
                     sh '''
