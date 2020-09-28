@@ -11,7 +11,7 @@ pipeline{
                   
             stage('ssh step') {
                 steps{
-                    withCredentials([file(credentialsId: 'vm_key', variable: 'my_key')], [string(credentialsId: 'DATABASE_URI', variable: 'uri')], [string(credentialsId: 'DB_PASSWORD', variable: 'pw')], [string(credentialsId: 'SECRET_KEY', variable: 'key')]){
+                    withCredentials([file(credentialsId: 'vm_key', variable: 'my_key')], string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')){
                     sh '''
                   
                     ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com << EOF
