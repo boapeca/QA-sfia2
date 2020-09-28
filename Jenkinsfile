@@ -13,11 +13,6 @@ pipeline{
                     sh '''
                     rm -rf sfiaTest
                     mkdir sfiaTest && cd $_
-                    def jobName = "path/to/your/jenkins/pipeline/master"
-                    def job = Jenkins.getInstance().getItemByFullName(jobName, Job.class)
-                    job.getBuilds().each { it.delete() }  
-                    job.nextBuildNumber = 1   
-                    job.save()
                     '''
                 }          
             }
