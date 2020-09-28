@@ -11,7 +11,7 @@ pipeline{
                   
             stage('ssh step') {
                 steps{
-                    withCredentials([file(credentialsId: 'vm_key', variable: 'my_key')]){
+                    withCredentials([file(credentialsId: 'vm_key', variable: 'my_key')], [string(credentialsId: 'DATABASE_URI', variable: 'uri')], [string(credentialsId: 'DB_PASSWORD', variable: 'pw')], [string(credentialsId: 'SECRET_KEY', variable: 'key')]){
                     sh '''
                   
                     ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com << EOF
@@ -22,7 +22,7 @@ pipeline{
                     export MYSQL_ROOT_PASSWORD=$DB_PASSWORD
                     export DATABASE_URI=$DATABASE_URI
                     export SECRET_KEY=$SECRET_KEY
-                    sudo -E DATABASE_URI=$DATABASE_URI MYSQL_ROOT_PASSWORD=$DB_PASSWORD SECRET_KEY=$SECRET_KEY docker-compose up -d --build
+                    sudo -E DATABASE_URI=$uri MYSQL_ROOT_PASSWORD=$pw SECRET_KEY=$key docker-compose up -d --build
                     sudo docker-compose logs
                     ls
                     EOF
