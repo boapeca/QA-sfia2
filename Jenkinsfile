@@ -30,10 +30,10 @@ pipeline{
                     '''
                 }          
             }
-            
+            /*
             stage('Install Docker & Docker-compose'){
                 steps{
-                        /*
+                        
                         curl https://get.docker.com | sudo bash
                     sudo usermod -aG docker $(whoami)
                         
