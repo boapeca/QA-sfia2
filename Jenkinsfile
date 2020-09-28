@@ -19,10 +19,10 @@ pipeline{
                     git clone https://github.com/psilva12/sfia2.git
                     cd sfia2
                     export MYSQL_DATABASE=db
-                    export MYSQL_ROOT_PASSWORD=$DB_PASSWORD
-                    export DATABASE_URI=$DATABASE_URI
-                    export SECRET_KEY=$SECRET_KEY
-                    sudo -E DATABASE_URI=$uri MYSQL_ROOT_PASSWORD=$pw SECRET_KEY=$key docker-compose up -d --build
+                    export MYSQL_ROOT_PASSWORD="$pw"
+                    export DATABASE_URI="$uri"
+                    export SECRET_KEY="$key"
+                    sudo -E DATABASE_URI="$uri" MYSQL_ROOT_PASSWORD="$pw" SECRET_KEY="$key" docker-compose up -d --build
                     sudo docker-compose logs
                     ls
                     EOF
