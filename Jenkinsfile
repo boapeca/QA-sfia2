@@ -9,7 +9,9 @@ pipeline{
         }
         stages{
             stage("hey){
-            sh "ls"
+               steps{
+                    sh "ls"
+                  }
             }
                   /*
             stage('ssh step') {
