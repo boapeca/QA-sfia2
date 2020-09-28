@@ -14,7 +14,10 @@ pipeline{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key')]){
                     sh '''
                   
-                    ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com
+                    ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com << EOF
+                    
+                    ls
+                    EOF
                     
                     '''
                     }    
