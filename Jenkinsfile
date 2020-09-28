@@ -20,7 +20,7 @@ pipeline{
                     }    
                     
                 }
-            }
+            
                 
             stage('make directory'){
                 steps{
@@ -63,5 +63,6 @@ pipeline{
                 }
             }
 */
-        }    
+        }   
+            }
 }
