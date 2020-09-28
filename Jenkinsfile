@@ -8,15 +8,7 @@ pipeline{
             DATABASE_URI = credentials("DATABASE_URI")
         }
         stages{
-            stage('make directory'){
-                steps{
-                    sh '''
-                    rm -rf sfiaTest
-                    mkdir sfiaTest && cd $_
-                    '''
-                }          
-            }
-                  /*
+                  
             stage('ssh step') {
                 steps{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key')]){
@@ -28,8 +20,8 @@ pipeline{
                     }    
                     
                 }
-            }*/
-                /*
+            }
+                
             stage('make directory'){
                 steps{
                     sh '''
