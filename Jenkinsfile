@@ -10,10 +10,14 @@ pipeline{
         stages{
             stage('ssh step') {
                 steps{
+                    withCredentials([file(credentialsId: 'vm_key', variable: 'my_key')]){
                     sh '''
-                    chmod 400 &vm_key
-                    ssh --t -o StrictHostKeyChecking=no -i $vm_key ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com
+                    cp \$my-public-key /src/main/resources/my_key.der
+                    chmod 400 &my_key
+                    ssh --t -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com
                     '''
+                    }    
+                    
                 }
             }
             stage('make directory'){
