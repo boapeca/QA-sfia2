@@ -19,8 +19,8 @@ pipeline{
                     rm -rf sfia2
                     git clone https://github.com/psilva12/sfia2.git
                     cd sfia2
-                    ./$load_me_env
-                    sudo docker-compose up -d --build
+                    
+                    sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw DATABASE_URI=$uri SECRET_KEY=$key docker-compose up -d --build
                     sudo docker-compose logs
                     ls
                     EOF
