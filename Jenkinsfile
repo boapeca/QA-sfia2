@@ -15,9 +15,7 @@ pipeline{
                     ssh --t -o StrictHostKeyChecking=no -i $vm_key ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com
                     '''
                 }
-            }    
-        }
-        stages{
+            }
             stage('make directory'){
                 steps{
                     sh '''
