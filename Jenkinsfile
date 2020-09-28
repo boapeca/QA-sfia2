@@ -15,6 +15,9 @@ pipeline{
                     sh '''
                   
                     ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-3-10-23-129.eu-west-2.compute.amazonaws.com << EOF
+                    rm -rf sfia2
+                    git clone https://github.com/psilva12/sfia2.git
+                    cd sfia2
                     export MYSQL_DATABASE=db
                     export MYSQL_ROOT_PASSWORD=$DB_PASSWORD
                     export DATABASE_URI=$DATABASE_URI
