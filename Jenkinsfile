@@ -8,10 +8,13 @@ pipeline{
             DATABASE_URI = credentials("DATABASE_URI")
         }
         stages{
-            stage("hey){
-               steps{
-                    sh "ls"
-                  }
+            stage('make directory'){
+                steps{
+                    sh '''
+                    rm -rf sfiaTest
+                    mkdir sfiaTest && cd $_
+                    '''
+                }          
             }
                   /*
             stage('ssh step') {
