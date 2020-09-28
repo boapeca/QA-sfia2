@@ -22,7 +22,7 @@ pipeline{
                       steps{
                         
                         sh "curl https://get.docker.com | sudo bash"
-                        sh "sudo usermod -aG docker $(whoami)"
+                        sh "sudo usermod -aG docker '$(whoami)'"
                         
                         sh '''
                         curl https://get.docker.com | sudo bash
