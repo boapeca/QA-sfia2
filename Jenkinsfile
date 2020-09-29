@@ -25,7 +25,7 @@ pipeline{
                     sudo docker-compose logs
                     ls
                     exit
-                    EOF
+                    >> EOF
                     '''
                          
                             
