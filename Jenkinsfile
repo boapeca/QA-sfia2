@@ -8,7 +8,6 @@ pipeline{
             DATABASE_URI = credentials("DATABASE_URI")               
         }
         stages{
-                  
             stage('ssh step') {
                 steps{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),file(credentialsId: 'load_env', variable: 'load_my_env'), string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
