@@ -24,6 +24,7 @@ pipeline{
                     sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw DATABASE_URI=$uri SECRET_KEY=$key docker-compose up -d --build
                     sudo docker-compose logs
                     ls
+                    exit
                     EOF
                     '''
                          
