@@ -5,8 +5,7 @@ pipeline{
             rollback = 'false'
             SECRET_KEY = credentials("SECRET_KEY")
             DB_PASSWORD = credentials("DB_PASSWORD")
-            DATABASE_URI = credentials("DATABASE_URI")
-                
+            DATABASE_URI = credentials("DATABASE_URI")               
         }
         stages{
                   
