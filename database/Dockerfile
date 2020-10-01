@@ -1,3 +1,3 @@
-#FROM mysql:5.7
-#COPY ./Create.sql /docker-entrypoint-initdb.d
-RUN ./Create.sql
+FROM mysql:5.7
+COPY ./Create.sql /docker-entrypoint-initdb.d
+#RUN ./Create.sql
