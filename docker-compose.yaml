@@ -19,7 +19,7 @@ services:
     depends_on:
       - mysql
   mysql:
-    image: db
+    # image: db
     build: ./database
     environment:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
