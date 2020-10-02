@@ -37,13 +37,16 @@ pipeline{
                 
             stage('Testing'){
                 steps{
-                    withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
+                    withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),string(credentialsId: 'ConnectDB', variable: 'connectTest'),string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
                     sh '''
                   
                     ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-18-130-176-196.eu-west-2.compute.amazonaws.com << EOF    
                     
                     rm -rf sfiaTest
                     cd sfia2
+                    $connectTest
+                    source database/Create.sql;
+                    exit
                     sudo -E DATABASE_URI=$uri SECRET_KEY=$key docker exec -it sfia2_frontend_1 pytest
                     sudo -E DATABASE_URI=$uri SECRET_KEY=$key docker exec -it sfia2_backend_1 pytest
                     exit
