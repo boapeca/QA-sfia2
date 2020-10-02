@@ -20,7 +20,7 @@ pipeline{
                     git clone https://github.com/psilva12/sfia2.git
                     cd sfia2
                     $connect
-                    
+                    source database/Create.sql;
                     exit
                     sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw DATABASE_URI=$uri SECRET_KEY=$key docker-compose up -d --build
                     sudo docker-compose logs
@@ -45,7 +45,7 @@ pipeline{
                     rm -rf sfiaTest
                     cd sfia2
                     $connectTest
-                    source database/Create.sql;
+                  
                     exit
                     sudo -E TESTDB_URI=$TEST_DATABASE_URI SECRET_KEY=$key docker exec -it sfia2_frontend_1 pytest
                     sudo -E TESTDB_URI=$TEST_DATABASE_URI SECRET_KEY=$key docker exec -it sfia2_backend_1 pytest
