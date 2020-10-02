@@ -16,13 +16,13 @@ services:
       - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
       - DATABASE_URI=${DATABASE_URI}
       - SECRET_KEY=${SECRET_KEY}
-    depends_on:
-      - mysql
-  mysql:
+    #depends_on:
+    #  - mysql
+  #mysql:
     #image: db
-    build: ./database
-    environment:
-      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    #build: ./database
+    #environment:
+   #   - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
   nginx:
     image: nginx:latest
     ports:
