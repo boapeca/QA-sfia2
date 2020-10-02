@@ -43,6 +43,7 @@ pipeline{
                     ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-18-130-176-196.eu-west-2.compute.amazonaws.com << EOF    
                     
                     rm -rf sfiaTest
+                    cd sfia2
                     sudo -E DATABASE_URI=$uri SECRET_KEY=$key docker exec -it frontend pytest
                     sudo -E DATABASE_URI=$uri SECRET_KEY=$key docker exec -it backend pytest
                     '''
