@@ -45,7 +45,7 @@ pipeline{
                     rm -rf sfiaTest
                     cd sfia2
                     
-                    sudo -E TEST_DATABASE_URI=$testUri SECRET_KEY=$key docker exec -it sfia2_backend_1 pytest --cov
+                    sudo docker exec -it sfia2_backend_1 pytest --cov application
                     sudo -E TEST_DATABASE_URI=$testUri SECRET_KEY=$key docker exec -it sfia2_frontend_1 pytest --cov
                     exit
                     >> EOF
