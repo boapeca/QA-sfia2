@@ -47,8 +47,8 @@ pipeline{
                     $connectTest
                   
                     exit
-                    sudo -E TESTDB_URI=$TEST_DATABASE_URI SECRET_KEY=$key docker exec -it sfia2_frontend_1 pytest
-                    sudo -E TESTDB_URI=$TEST_DATABASE_URI SECRET_KEY=$key docker exec -it sfia2_backend_1 pytest
+                    sudo docker exec -it sfia2_frontend_1 pytest --cov
+                    sudo docker exec -it sfia2_backend_1 pytest --cov
                     exit
                     >> EOF
                     '''
