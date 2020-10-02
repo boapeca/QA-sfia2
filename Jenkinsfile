@@ -35,11 +35,12 @@ pipeline{
                 }
             }
                 
-            stage('make directory'){
+            stage('Testing'){
                 steps{
                     sh '''
                     rm -rf sfiaTest
-                    mkdir sfiaTest && cd $_
+                    sudo -E DATABASE_URI=$uri SECRET_KEY=$key docker exec -it frontend pytest
+                    sudo -E DATABASE_URI=$uri SECRET_KEY=$key docker exec -it backend pytest
                     '''
                 }          
             }
