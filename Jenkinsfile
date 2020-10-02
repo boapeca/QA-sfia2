@@ -46,6 +46,8 @@ pipeline{
                     cd sfia2
                     sudo -E DATABASE_URI=$uri SECRET_KEY=$key docker exec -it frontend pytest
                     sudo -E DATABASE_URI=$uri SECRET_KEY=$key docker exec -it backend pytest
+                    exit
+                    >> EOF
                     '''
                     }        
                 }          
