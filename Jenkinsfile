@@ -47,6 +47,7 @@ pipeline{
                     sudo -E DATABASE_URI=$uri SECRET_KEY=$key docker exec -it frontend pytest
                     sudo -E DATABASE_URI=$uri SECRET_KEY=$key docker exec -it backend pytest
                     '''
+                    }        
                 }          
             }
             /*
