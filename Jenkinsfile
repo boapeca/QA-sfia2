@@ -47,9 +47,8 @@ pipeline{
                     $connectTest
                     source database/Create.sql;
                     exit
-                    sudo docker exec -it sfia2_backend_1 pytest --cov application --cov-report
-                    exit
-                    sudo docker exec -it sfia2_frontend_1 pytest --cov-report term --cov=sfia2 tests/ application --cov-report 
+                    sudo docker exec -it sfia2_backend_1 pytest --cov application --cov-report term --cov=sfia2 tests/
+                    sudo docker exec -it sfia2_frontend_1 pytest --cov application --cov-report term --cov=sfia2 tests/ 
                     exit
                     >> EOF
                     '''
