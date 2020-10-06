@@ -47,8 +47,9 @@ pipeline{
                     $connectTest
                     source database/Create.sql;
                     exit
-                    sudo -E TEST_DATABASE_URI=$testUri SECRET_KEY=$key docker exec -it sfia2_backend_1 pytest --cov application
-                    sudo -E TEST_DATABASE_URI=$testUri SECRET_KEY=$key docker exec -it sfia2_frontend_1 pytest --cov
+                    sudo docker exec -it sfia2_backend_1 pytest --cov application --cov-report
+                    exit
+                    sudo docker exec -it sfia2_frontend_1 pytest --cov-report term --cov=sfia2 tests/ application --cov-report 
                     exit
                     >> EOF
                     '''
