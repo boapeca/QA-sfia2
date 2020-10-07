@@ -47,8 +47,12 @@ pipeline{
                     $connectTest
                     source database/Create.sql;
                     exit
-                    sudo docker exec -it sfia2_backend_1 pytest --cov application
+                    
                     sudo docker exec -it sfia2_frontend_1 pytest --cov application
+                    exit
+                    >> EOF
+                    ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-18-130-229-61.eu-west-2.compute.amazonaws.com << EOF
+                    sudo docker exec -it sfia2_backend_1 pytest --cov application
                     exit
                     >> EOF
                     '''
