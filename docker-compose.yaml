@@ -17,13 +17,13 @@ services:
       - DATABASE_URI=${DATABASE_URI}
       - SECRET_KEY=${SECRET_KEY}
       - TEST_DATABASE_URI=${TEST_DATABASE_URI}
-    #depends_on:
-    #  - mysql
-  #mysql:
-    #image: db
-    #build: ./database
-    #environment:
-   #   - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+    depends_on:
+      - mysql
+  mysql:
+    image: db
+    build: ./database
+    environment:
+      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
   nginx:
     image: nginx:latest
     ports:
