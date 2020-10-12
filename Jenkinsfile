@@ -9,20 +9,6 @@ pipeline{
                 
         }
         stages{
-            stage('Build and Push Images'){
-                            steps{
-                                script{
-                                    if (env.rollback == 'false'){
-                                        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
-                                            sh '''
-                                            sudo docker-compose build
-                                            sudo docker-compose push
-                                            '''
-                                        }
-                                    }
-                                }
-                            }
-            }
             stage('ssh step') {
                 steps{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),string(credentialsId: 'ConnectDB', variable: 'connect'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
@@ -63,9 +49,10 @@ pipeline{
                     exit
                     sudo docker exec sfia2_frontend_1 pytest --cov application
                     sudo docker exec sfia2_backend_1 pytest --cov application
-
-                    sudo docker exec sfia2_frontend_1 pytest --cov application > frontendTest.txt
-                    sudo docker exec sfia2_backend_1 pytest --cov application > backendTest.txt
+                    rm -rf Tests
+                    mkdir Tests
+                    sudo docker exec sfia2_frontend_1 pytest --cov application > Tests/frontendTest.txt
+                    sudo docker exec sfia2_backend_1 pytest --cov application > Tests/backendTest.txt
 
                     exit
                     >> EOF
