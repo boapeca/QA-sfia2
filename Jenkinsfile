@@ -9,30 +9,20 @@ pipeline{
                 
         }
         stages{
-            stage('Build Images'){
-                            steps{
-                                script{
-                                    if (env.rollback == 'false'){
-                                        sh '''
-                                        sudo docker-compose build
-                                        '''
-                                    }
-                                }
-                            }
-            }
-            stage('Tag & Push Images'){
+            stage('Build and Push Images'){
                             steps{
                                 script{
                                     if (env.rollback == 'false'){
                                         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
                                             sh '''
+                                            sudo docker-compose build
                                             sudo docker-compose push
                                             '''
                                         }
                                     }
                                 }
                             }
-                        }
+            }
             stage('ssh step') {
                 steps{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),string(credentialsId: 'ConnectDB', variable: 'connect'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
