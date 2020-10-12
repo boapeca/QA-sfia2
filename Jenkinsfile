@@ -47,11 +47,10 @@ pipeline{
                     $connectTest
                     source database/Create.sql;
                     exit
-                    sudo apt -y install python-pytest
-                    pytest --cov=myproj frontend/tests/
-                    pytest --cov=myproj backend/tests/
-                    sudo  docker exec -it sfia2_frontend_1 pytest
+
                     sudo  docker exec -it sfia2_backend_1 pytest --cov-report term --cov=application
+                    sudo  docker exec -it sfia2_frontend_1 pytest --cov-report term --cov=application
+
 
                     '''
                     // --cov-report term --cov=sfia2 tests/ 
