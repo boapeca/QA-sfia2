@@ -9,6 +9,28 @@ pipeline{
                 
         }
         stages{
+            stage('Build Images'){
+                            steps{
+                                script{
+                                    if (env.rollback == 'false'){
+                                        image1 = docker.build("palinhesosilva/frontend")
+                                        image2 = docker.build("palinhesosilva/backend")
+                                    }
+                                }
+                            }
+            }
+            stage('Tag & Push Images'){
+                            steps{
+                                script{
+                                    if (env.rollback == 'false'){
+                                        docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
+                                            image1.push("${env.app_version}")
+                                            image2.push("${env.app_version}")
+                                        }
+                                    }
+                                }
+                            }
+                        }
             stage('ssh step') {
                 steps{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),string(credentialsId: 'ConnectDB', variable: 'connect'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
@@ -61,40 +83,6 @@ pipeline{
                     }        
                 }          
             }
-            /*
-            stage('Install Docker & Docker-compose'){
-                steps{
-                        
-                        curl https://get.docker.com | sudo bash
-                    sudo usermod -aG docker $(whoami)
-                        
-                    sh '''
-                    curl https://get.docker.com | sudo bash
-                    sudo usermod -aG docker $(whoami)
-                    sudo systemctl enable docker
-                    sudo curl -L "https://github.com/docker/compose/releases/download/1.27.3/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-                    sudo chmod +x /usr/local/bin/docker-compose
-                    '''
-                        
-                }
-            }
-            stage('Deploy App'){
-                steps{
-                    //sh "sudo docker-compose down --rmi all"
-                    sh "export MYSQL_DATABASE=db"          
-                    sh "export MYSQL_ROOT_PASSWORD=$DB_PASSWORD"
-                    sh "export DATABASE_URI=$DATABASE_URI"
-                    // sh "source ./load_env.sh"
-                    sh "export SECRET_KEY=$SECRET_KEY"
-                    // sh "sudo docker-compose up -d --build backend=${DB_PASSWORD} backend=${DATABASE_URI} backend=${SECRET_KEY}"
-                    sh "sudo -E DATABASE_URI=$DATABASE_URI MYSQL_ROOT_PASSWORD=$DB_PASSWORD SECRET_KEY=$SECRET_KEY docker-compose up -d --build"
-                    //sudo -E MYSQL_ROOT_PASSWORD=${DB_PASSWORD} DB_PASSWORD=${DB_PASSWORD} DATABASE_URI=${DATABASE_URI} SECRET_KEY=${SECRET_KEY} docker-compose pull && sudo -E MYSQL_ROOT_PASSWORD=${DB_PASSWORD} DB_PASSWORD=${DB_PASSWORD} DATABASE_URI=${DATABASE_URI} SECRET_KEY=${SECRET_KEY} docker-compose up -d --build
-                    // sh "mysql_upgrade --protocol=tcp -P 3306"
-                    sh "sudo docker-compose logs"
-                }
-            }
-*/
-                
         }
     
 }
