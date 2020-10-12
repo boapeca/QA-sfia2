@@ -48,9 +48,9 @@ pipeline{
                     source database/Create.sql;
                     exit
 
-                    sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw TEST_DATABASE_URI=$testUri DATABASE_URI=$uri SECRET_KEY=$key docker exec -it sfia2_backend_1 pytest --cov-report term --cov=application
+                    sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw TEST_DATABASE_URI=$testUri DATABASE_URI=$uri SECRET_KEY=$key docker exec -it sfia2_backend_1 pytest --cov-report term --cov=application --timeout=30
 
-                    sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw TEST_DATABASE_URI=$testUri DATABASE_URI=$uri SECRET_KEY=$key docker exec -it sfia2_frontend_1 pytest --cov-report term --cov=application
+                    sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw TEST_DATABASE_URI=$testUri DATABASE_URI=$uri SECRET_KEY=$key docker exec -it sfia2_frontend_1 pytest --cov-report term --cov=application --timeout=30
 
                     exit
                     >> EOF
