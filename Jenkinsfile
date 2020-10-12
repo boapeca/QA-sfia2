@@ -47,7 +47,7 @@ pipeline{
                     $connectTest
                     source database/Create.sql;
                     exit
-                    sudopip install pytest-timeout
+                    sudo pip install pytest-timeout
                     sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw TEST_DATABASE_URI=$testUri DATABASE_URI=$uri SECRET_KEY=$key docker exec -it sfia2_backend_1 pytest --timeout=30 --cov-report term --cov=application
 
                     sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw TEST_DATABASE_URI=$testUri DATABASE_URI=$uri SECRET_KEY=$key docker exec -it sfia2_frontend_1 pytest --timeout=30 --cov-report term --cov=application
