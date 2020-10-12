@@ -13,8 +13,8 @@ pipeline{
                             steps{
                                 script{
                                     if (env.rollback == 'false'){
-                                        image1 = docker.build("palinhesosilva/frontend")
-                                        image2 = docker.build("palinhesosilva/backend")
+                                        image1 = docker.build("palinhesosilva/frontend", "./frontend")
+                                        image2 = docker.build("palinhesosilva/backend", "./backend")
                                     }
                                 }
                             }
