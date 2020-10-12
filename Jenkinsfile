@@ -13,8 +13,9 @@ pipeline{
                             steps{
                                 script{
                                     if (env.rollback == 'false'){
-                                        image1 = docker.build("palinhesosilva/frontend", "./frontend")
-                                        image2 = docker.build("palinhesosilva/backend", "./backend")
+                                        sh '''
+                                        sudo docker-compose build
+                                        '''
                                     }
                                 }
                             }
@@ -24,8 +25,9 @@ pipeline{
                                 script{
                                     if (env.rollback == 'false'){
                                         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials'){
-                                            image1.push("${env.app_version}")
-                                            image2.push("${env.app_version}")
+                                            sh '''
+                                            sudo docker-compose push
+                                            '''
                                         }
                                     }
                                 }
