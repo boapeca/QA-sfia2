@@ -14,7 +14,7 @@ pipeline{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),string(credentialsId: 'ConnectDB', variable: 'connect'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
                     sh '''
                   
-                    ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-18-130-229-61.eu-west-2.compute.amazonaws.com << EOF
+                    ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-35-176-194-80.eu-west-2.compute.amazonaws.com << EOF
                     sudo service nginx stop
                     rm -rf sfia2
                     git clone https://github.com/psilva12/sfia2.git
@@ -40,7 +40,7 @@ pipeline{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),string(credentialsId: 'TESTDB_CONNECT', variable: 'connectTest'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
                     sh '''
                   
-                    ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-18-130-229-61.eu-west-2.compute.amazonaws.com << EOF    
+                    ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-35-176-194-80.eu-west-2.compute.amazonaws.com << EOF
                     
                     rm -rf sfiaTest
                     cd sfia2
