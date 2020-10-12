@@ -25,7 +25,7 @@ services:
 #    environment:
 #      - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
   nginx:
-    image: nginx:latest
+    image: palinhesosilva/nginx
     ports:
     - target: 80
       published: 80
