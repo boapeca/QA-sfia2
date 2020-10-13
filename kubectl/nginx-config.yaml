@@ -9,5 +9,6 @@ data:
       index index.html;
       location / {
           proxy_pass  http://frontend:5000/;
+          return 200 "Small Mistake UPS, DELETE ME\n";
       }
     }
