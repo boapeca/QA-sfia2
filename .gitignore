@@ -5,6 +5,7 @@
 /Ansible
 /Terraform
 
-/kubectl/backend.yaml
+
 /kubectl/db.yaml
 /kubectl/persistentVolumeClaim.yaml
+/kubectl/backend.yaml
