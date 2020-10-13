@@ -14,7 +14,7 @@ pipeline{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),string(credentialsId: 'TESTDB_CONNECT', variable: 'connectTest'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
                     sh '''
 
-                    ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-35-178-177-197.eu-west-2.compute.amazonaws.com << EOF
+                    ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-35-176-194-80.eu-west-2.compute.amazonaws.com << EOF
 
                     rm -rf sfiaTest
                     cd sfia2
@@ -28,7 +28,7 @@ pipeline{
                     sudo docker exec sfia2_backend_1 pytest --cov application > backendTest.txt
 
                     exit
-
+                    >> EOF
 
                     '''
                     // --cov-report term --cov=sfia2 tests/
