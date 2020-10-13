@@ -14,9 +14,10 @@ pipeline{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),string(credentialsId: 'TESTDB_CONNECT', variable: 'connectTest'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
                     sh '''
 
+                    ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-35-178-177-197.eu-west-2.compute.amazonaws.com << EOF
 
-
-
+                    rm -rf sfiaTest
+                    cd sfia2
                     $connectTest
                     source database/Create.sql;
                     exit
