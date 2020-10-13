@@ -24,8 +24,8 @@ pipeline{
                     sudo docker exec sfia2_frontend_1 pytest --cov application
                     sudo docker exec sfia2_backend_1 pytest --cov application
 
-                    sudo docker exec sfia2_frontend_1 pytest --cov application > frontendTest.txt
-                    sudo docker exec sfia2_backend_1 pytest --cov application > backendTest.txt
+                    sudo docker exec sfia2_frontend_1 pytest --cov application > ~/Tests/frontendTest.txt
+                    sudo docker exec sfia2_backend_1 pytest --cov application > ~/Tests/backendTest.txt
 
                     exit
                     >> EOF
