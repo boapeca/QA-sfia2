@@ -2,9 +2,18 @@
 **/**/__pycache__/
 **/**/.coverage
 
-/Ansible
-/Terraform
+/Ansible/ansible-jenkins.pem
+/Ansible/JenkinsSC.sh
 
+
+/Terraform/ansible-jenkins.pem
+/Terraform/variables.tf
+/Terraform/*.tfstate
+/Terraform/RDS/variables.tf
+/Terraform/EC2/variables.tf
+/Terraform/EC2/outputs.tf
+/Terraform/EC2/ansible-jenkins.pem
+/Terraform/.terraform
 
 /kubectl/db.yaml
 /kubectl/persistentVolumeClaim.yaml
