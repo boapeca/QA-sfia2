@@ -53,7 +53,7 @@ pipeline{
                     sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw TEST_DATABASE_URI=$testUri DATABASE_URI=$uri SECRET_KEY=$key docker-compose build
                     sudo docker-compose logs
                     $loginGcloud
-                    echo $textBackend >> kubectl/backend.yaml
+                    writeFile file: 'kubectl/backend.yaml', text: readFile(backendYaml)
                     kubectl apply -f kubectl/
                     kubectl get services
                     ls
