@@ -14,7 +14,7 @@ pipeline{
                     withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),string(credentialsId: 'TESTDB_CONNECT', variable: 'connectTest'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
                     sh '''
 
-                    ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-35-176-194-80.eu-west-2.compute.amazonaws.com << EOF
+
 
                     rm -rf sfiaTest
                     cd sfia2
@@ -28,7 +28,7 @@ pipeline{
                     sudo docker exec sfia2_backend_1 pytest --cov application > backendTest.txt
 
                     exit
-                    >> EOF
+
 
                     '''
                     // --cov-report term --cov=sfia2 tests/
@@ -53,7 +53,7 @@ pipeline{
                     sudo docker-compose logs
                     $loginGcloud
 
-                    kubectl create secret generic test-secret --from-literal=SECRET_KEY=$key --from-literal=DATABASE_URI=$uri --from-literal=TEST_DATABASE_URI=$testUri --from-literal=MYSQL_ROOT_PASSWORD=$pw --from-literal=DB_PASSWORD=$pw
+                    kubectl apply -f $backendYaml
                     kubectl apply -f kubectl/
                     kubectl get services
                     ls
