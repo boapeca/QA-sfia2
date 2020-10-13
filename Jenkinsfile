@@ -53,8 +53,10 @@ pipeline{
                     sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw TEST_DATABASE_URI=$testUri DATABASE_URI=$uri SECRET_KEY=$key docker-compose build
                     sudo docker-compose logs
                     $gcloudLogin
-
-                    $kubeBackend
+                    kubectl apply -f kubectl/
+                    cd kubectl/
+                    kubectl apply -f $kubeBackend
+                    cd ..
                     kubectl get services
                     ls
                     exit
