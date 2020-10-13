@@ -54,7 +54,7 @@ pipeline{
                     sudo docker-compose logs
                     $gcloudLogin
                     cd kubectl/
-                    echo '$backendText' >> backend.yaml
+                    echo $backendText >> backend.yaml
                     cd ..
                     kubectl apply -f kubectl/
                     kubectl get services
