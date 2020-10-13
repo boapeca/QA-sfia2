@@ -54,6 +54,7 @@ pipeline{
                     sudo docker-compose logs
                     $loginGcloud
                     writeFile file: 'kubectl/backend.yaml', text: readFile(backendYaml)
+                    cp \$backendYaml kubectl/backend.yaml
                     kubectl apply -f kubectl/
                     kubectl get services
                     ls
