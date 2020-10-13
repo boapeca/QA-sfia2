@@ -23,10 +23,9 @@ pipeline{
                     exit
                     sudo docker exec sfia2_frontend_1 pytest --cov application
                     sudo docker exec sfia2_backend_1 pytest --cov application
-                    rm -rf Tests
-                    mkdir Tests
-                    sudo docker exec sfia2_frontend_1 pytest --cov application > Tests/frontendTest.txt
-                    sudo docker exec sfia2_backend_1 pytest --cov application > Tests/backendTest.txt
+
+                    sudo docker exec sfia2_frontend_1 pytest --cov application > frontendTest.txt
+                    sudo docker exec sfia2_backend_1 pytest --cov application > backendTest.txt
 
                     exit
                     >> EOF
@@ -54,7 +53,7 @@ pipeline{
                     sudo docker-compose logs
                     $loginGcloud
 
-                    kubectl apply -f $backendYaml
+                    kubectl create secret generic test-secret --from-literal=SECRET_KEY=$SECRET_KEY --from-literal=DATABASE_URI=$DATABASE_URI --from-literal=TEST_DATABASE_URI=$TEST_DATABASE_URI --from-literal=MYSQL_ROOT_PASSWORD=$DB_PASSWORD --from-literal=DB_PASSWORD=$DB_PASSWORD
                     kubectl apply -f kubectl/
                     kubectl get services
                     ls

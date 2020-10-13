@@ -1,0 +1,51 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  selector:
+    app: backend
+  ports: 
+  - protocol: TCP
+    port: 5001
+    targetPort: 5001
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend
+  labels: 
+    app: backend
+spec:
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+      - name: backend
+        image: palinhesosilva/backend:latest
+        env:
+          # Use secret in real usage
+          - name: MYSQL_ROOT_PASSWORD
+            value: ${DB_PASSWORD}
+            # Use secret in real usage
+          - name: DB_PASSWORD
+            value: ${DB_PASSWORD}
+          # Use secret in real usage
+          - name: TEST_DATABASE_URI
+            value: ${TEST_DATABASE_URI}
+          # Use secret in real usage
+          - name: DATABASE_URI
+            value: ${DATABASE_URI}
+          - name: SECRET_KEY
+            value: ${SCRETE_KEY}
+          - name : MYSQL_DATABASE
+            value: mysql
+        ports:
+        - containerPort: 5001
+
