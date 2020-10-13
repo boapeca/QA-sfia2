@@ -1,0 +1,64 @@
+---
+- hosts: jenkins
+  # run as the root user on the remote machine
+  become: true
+  # declare some variables that can be used throughout the playbook
+  # list of tasks to run on the remote machine
+  tasks:
+    - name: Dependencies
+      apt:
+        pkg:
+          - openjdk-8-jre
+          - wget
+          - git
+        state: present
+        update_cache: true
+
+    - name: check jenkins apt repo key is installed
+      apt_key: 
+        url: https://pkg.jenkins.io/debian-stable/jenkins.io.key
+        state: present
+      become: yes
+
+    - name: check the repo is configured
+      apt_repository: 
+        repo: 'deb https://pkg.jenkins.io/debian-stable binary/'
+        state: present
+      become: yes
+
+    - name: Check jenkins is installed
+      apt: 
+        name: jenkins 
+        update_cache: true
+      become: yes
+
+    - name: check jenkins is running
+      service: 
+        name: jenkins 
+        state: started
+
+    #command: sudo su - jenkins
+    - name: get jenkins password
+      shell: cat /var/lib/jenkins/secrets/initialAdminPassword 
+      changed_when: false
+      register: pw
+
+    - name: print jenkins password
+      debug:
+       var: pw.stdout 
+#command: sudo apt update
+    #command: sudo apt install openjdk-8-jdk -y
+    #command: sudo useradd -m -s /bin/bash jenkins
+- hosts: testVM
+  become: true
+  vars:
+  - install_directory: /opt/docker
+  tasks:
+  - name: 'install docker and docker-compose'
+    script: docker.sh
+  - name: 'install rds dependencies'
+    command: sudo apt install mysql-client-core-5.7 -y
+  - name: 'install gcloud'
+    command: sudo snap install google-cloud-sdk --classic
+  - name: 'install kubectl'
+    command: sudo snap install kubectl --classic
