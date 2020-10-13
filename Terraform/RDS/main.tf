@@ -36,6 +36,7 @@ resource "aws_db_instance" "testdb2" {
   password                = var.password
   port                    = var.port
   storage_type            = var.storage_type
+  publicly_accessible    = true
 
   vpc_security_group_ids = var.vpc_security_group_ids
 

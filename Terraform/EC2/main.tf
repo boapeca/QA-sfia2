@@ -15,7 +15,6 @@ resource "aws_instance" "Instances" {
   key_name               = var.pem-key
   subnet_id              = var.subnet_id
   vpc_security_group_ids = var.vpc_security_group_ids
-  publicly_accessible    = true
 
 
   lifecycle {
