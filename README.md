@@ -69,7 +69,7 @@ Nginx was used as a reverse proxy, meaning the application would be behind nginx
 #### Kubernetes
 
 Kubernetes was the Orchestration Tool used for this project. Kubernetes is a super powerful tool that can deploy multiple instances of the same application if needed, is easily scalable and easy to deploy, update and take down with a few commands.
-Kubernetes pulls the images from my Docker Hub in order create the live environment for the project.
+Kubernetes pulls the images from my Docker Hub in order create the required live environment for this project to run.
 
 
 ### Author
