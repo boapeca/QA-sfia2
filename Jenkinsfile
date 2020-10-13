@@ -54,9 +54,7 @@ pipeline{
                     sudo docker-compose logs
                     $gcloudLogin
                     kubectl apply -f kubectl/
-                    cd kubectl/
                     kubectl apply -f $kubeBackend
-                    cd ..
                     kubectl get services
                     ls
                     exit
