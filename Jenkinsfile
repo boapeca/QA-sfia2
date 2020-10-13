@@ -38,7 +38,7 @@ pipeline{
             }
             stage('Deploy') {
                 steps{
-                    withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),[file(credentialsId: 'kubeBackend', variable: 'backendYaml'),string(credentialsId: 'ConnectDB', variable: 'connect'),string(credentialsId: 'gcloudLogin', variable: 'loginGcloud'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
+                    withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),file(credentialsId: 'kubeBackend', variable: 'backendYaml'),string(credentialsId: 'ConnectDB', variable: 'connect'),string(credentialsId: 'gcloudLogin', variable: 'loginGcloud'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
                     sh '''
 
                     ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-35-176-194-80.eu-west-2.compute.amazonaws.com << EOF
