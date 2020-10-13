@@ -38,7 +38,7 @@ pipeline{
             }
             stage('Deploy') {
                 steps{
-                    withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),string(credentialsId: 'ConnectDB', variable: 'connect'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
+                    withCredentials([file(credentialsId: 'vm_key', variable: 'my_key'),[file(credentialsId: 'kubeBackend', variable: 'backendYaml'),string(credentialsId: 'ConnectDB', variable: 'connect'),string(credentialsId: 'gcloudLogin', variable: 'loginGcloud'),string(credentialsId: 'TESTDB_URI', variable: 'testUri'), string(credentialsId: 'DATABASE_URI', variable: 'uri'), string(credentialsId: 'DB_PASSWORD', variable: 'pw'), string(credentialsId: 'SECRET_KEY', variable: 'key')]){
                     sh '''
 
                     ssh -tt -o StrictHostKeyChecking=no -i $my_key ubuntu@ec2-35-176-194-80.eu-west-2.compute.amazonaws.com << EOF
@@ -52,10 +52,8 @@ pipeline{
                     exit
                     sudo -E MYSQL_ROOT_PASSWORD=$pw DB_PASSWORD=$pw TEST_DATABASE_URI=$testUri DATABASE_URI=$uri SECRET_KEY=$key docker-compose build
                     sudo docker-compose logs
-                    $gcloudLogin
-                    cd kubectl/
-                    echo $backendText >> backend.yaml
-                    cd ..
+                    $loginGcloud
+                    cp $backendYaml sfia2/kubectl/
                     kubectl apply -f kubectl/
                     kubectl get services
                     ls
