@@ -16,8 +16,7 @@ pipeline{
 
 
 
-                    rm -rf sfiaTest
-                    cd sfia2
+
                     $connectTest
                     source database/Create.sql;
                     exit
